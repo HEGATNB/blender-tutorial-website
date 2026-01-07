@@ -1,0 +1,84 @@
+@font-face {
+  font-family: 'NavFont';
+  src: url('../fonts/DejaVuSans.ttf');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NavFontBold';
+  src: url('../fonts/DejaVuSans-Bold.ttf');
+  font-weight: 500;
+  font-style: normal;
+}
+
+.nav-main-container{
+    height:55px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.nav-list{
+    gap: 15px;
+    align-items: center;
+    display: flex;
+    height: 100%;
+}
+
+.logo-text{
+    color: white;
+    user-select: none;
+}
+
+.logo-image{
+    height: 45px;
+    margin-right: auto;
+}
+
+.user-avatar{
+    height: 45px;
+}
+
+.nav-button span {
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    font-family: 'NavFontBold', sans-serif;
+}
+
+.nav-main-container span{
+  color: white;
+}
+
+.nav-logo-container{
+    margin-left: 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-family: 'NavFont', sans-serif;
+}
+
+.nav-button{
+   background: none;
+   border-radius: 10px;
+   border: none;
+   height: 90%;
+   display: flex;
+   padding: 10px;
+   font-weight: bold;
+   align-items: center;
+   justify-content: center;
+}
+
+.nav-button:active,
+.nav-button:hover{
+    background: #999;
+}
+
+.nav-elements{
+    display: flex;
+    gap: 15px;
+    margin-left:auto;
+    margin-right:25px;
+}

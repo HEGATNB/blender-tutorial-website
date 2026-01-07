@@ -1,0 +1,83 @@
+@font-face {
+  font-family: 'MainFont';
+  src: url('https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37/ttf/DejaVuSans.ttf');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MainFontBold';
+  src: url('../fonts/DejaVuSans-Bold.ttf');
+  font-weight: 500;
+  font-style: normal;
+}
+
+.info-container{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    gap: 5px;
+    margin-left: 10px;
+    align-items: stretch;
+}
+
+.main-info{
+    background-image: url('../assets/blender_background.jpg');
+    border-radius: 15px;
+    border: 2px solid #4b4b4b;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 79%;
+    min-height: 900px;
+    display: flex;
+}
+
+.courses-list{
+    display: flex;
+    width:20%;
+    height: fit-content;
+    flex-direction: column;
+    border: 2px solid #4b4b4b;
+    border-radius: 15px;
+}
+
+.course-active{
+    background-color: #282828;
+}
+
+.course-inactive{
+    background-color: #303030;
+}
+
+.course-first{
+    border-radius: 15px 15px 0 0;
+    background-color: #303030;
+}
+
+.course-last{
+    background-color: #303030;
+    border-radius: 0 0 15px 15px;
+}
+
+.course-active,
+.course-inactive,
+.course-last,
+.course-first{
+    user-select: none;
+    width: 100%;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    color: white;
+    font-family: 'MainFont', sans-serif;
+    font-size: 30px;
+}
+
+.course-active:hover,
+.course-inactive:hover,
+.course-last:hover,
+.course-first:hover{
+    background-color: #444444 !important;
+}
