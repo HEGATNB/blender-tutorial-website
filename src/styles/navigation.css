@@ -53,13 +53,16 @@
 
 .nav-logo-container{
     margin-left: 15px;
+    text-decoration: none;
     display: flex;
+    max-height: 55px !important;
     gap: 10px;
     align-items: center;
     font-family: 'NavFont', sans-serif;
 }
 
 .nav-button{
+   user-select: none;
    background: none;
    border-radius: 10px;
    border: none;

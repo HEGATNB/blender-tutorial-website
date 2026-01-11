@@ -12,16 +12,23 @@
   font-style: normal;
 }
 
+
+.left-right-group{
+    display: flex;
+    gap: 5px;
+}
+
 .info-container{
     width: 100%;
     height: fit-content;
     display: flex;
     gap: 5px;
+    flex-direction: column;
     margin-left: 10px;
     align-items: stretch;
 }
 
-.main-info{
+.work-space{
     background-image: url('../assets/blender_background.jpg');
     border-radius: 15px;
     border: 2px solid #4b4b4b;
@@ -31,6 +38,16 @@
     width: 79%;
     min-height: 900px;
     display: flex;
+}
+
+.guide-space{
+    background: #3d3d3d;
+    border-radius: 15px;
+    justify-items: center;
+    border: 2px solid #4b4b4b;
+    width: 79%;
+    min-height: 900px;
+    display: grid;
 }
 
 .courses-list{
@@ -80,4 +97,64 @@
 .course-last:hover,
 .course-first:hover{
     background-color: #444444 !important;
+}
+
+.design-line{
+    border: 2px solid #4b4b4b;
+    border-bottom: none;
+    background: #303030;
+    width:79%;
+    height: 35px;
+    border-radius:25px 25px 0 0 ;
+    margin-bottom: -5px;
+}
+
+.progress-container {
+    border: 2px solid #4b4b4b;
+    padding-top: 15px;
+    border-top: none;
+    width: 79%;
+    height: 75px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 0 25px 25px;
+    background: #1d1d1d;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-bar {
+    width: 95%;
+    height: 25px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 2px solid #4b4b4b;
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: #303030;
+}
+
+.progress-bar::-webkit-progress-bar {
+    background-color: transparent;
+}
+
+.progress-bar::-webkit-progress-value {
+    background-color: #426dae;
+    border-radius: 13px;
+}
+
+.progress-bar::-moz-progress-bar {
+    background-color: #426dae;
+    border-radius: 13px;
+}
+
+.guide-text{
+    color: #e6e6e6;
+    margin-top: 25px;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: 'MainFont', sans-serif;
 }

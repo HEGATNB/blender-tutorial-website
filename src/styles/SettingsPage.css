@@ -1,0 +1,36 @@
+.settings-content{
+    background: #3d3d3d;
+    width: 750px;
+    height: 950px;
+    border-radius: 25px;
+}
+
+.page-container{
+    width: 100%;
+    display: grid;
+    height: 100%;
+    align-items: center;
+    justify-items: center;
+}
+
+.buttons-container{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 35px;
+    height: 70%;
+    margin-top: 80px;
+}
+
+.settings-button{
+    width: 250px;
+    height: 45px;
+    background: #545454;
+    color: #e6e6e6;
+    border-radius: 5px;
+    border: none;
+}
+
+.settings-button:hover{
+    background: #4772b3;
+}
