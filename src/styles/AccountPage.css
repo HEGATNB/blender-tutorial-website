@@ -1,0 +1,78 @@
+@font-face {
+  font-family: 'MainFont';
+  src: url('https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37/ttf/DejaVuSans.ttf');
+  font-weight: 300;
+  font-style: normal;
+}
+
+.main-page-container{
+    width:100%;
+    height:100%;
+}
+
+.login-window{
+    margin: auto;
+    background: #1b1b1b;
+    color: #e6e6e6;
+    width: 750px;
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 160px;
+    border-radius: 25px;
+}
+
+
+.input-window-description{
+    width:90%;
+    margin: 5%;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 45px;
+}
+
+.input-window-description-list{
+    width:100%;
+}
+
+.data-input-window:active{
+    border-color:
+}
+
+.data-input-window{
+    margin: auto;
+    width: 100%;
+    height: 45px;
+    border-radius: 10px;
+    background: #545454;
+    border: none;
+    padding-left: 10px;
+    color: #bcbcbc;
+}
+
+.options-button{
+    color: #4772b3;
+    margin: 15px;
+    background:none;
+    border: none;
+}
+
+
+.description-text{
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'MainFont', sans-serif;
+    user-select: none;
+}
+
+.input-confirm-button{
+    width: 90%;
+    height: 45px;
+    background: #4772b3;
+    color: #e6e6e6;
+    border-radius: 10px;
+    border: none;
+}
