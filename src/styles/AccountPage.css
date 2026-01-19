@@ -76,3 +76,11 @@
     border-radius: 10px;
     border: none;
 }
+
+.input-confirm-button:active{
+    background: #3e6094;
+}
+
+#error{
+    border: 3px solid #ee5353 !important;
+}

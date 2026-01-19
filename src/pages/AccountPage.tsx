@@ -1,8 +1,30 @@
 import '../styles/AccountPage.css'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
+import validation from '../components/validation.tsx'
 
 function Account(){
-    const [isLogged,setLogged] = useState(false);
+
+    const [isLogged,setLogged] = useState(false);              //хук для состояния входа
+    const [emailError, setEmailError] = useState(false);       //хук для ошибки в логине
+    const [passwordError, setPasswordError] = useState(false); //хук для ошибки в пароле
+
+    const emailRef = useRef<HTMLInputElement>(null);      //ссылка на ввод эмейла
+    const passwordRef = useRef<HTMLInputElement>(null);   //ссылка на ввод пароля
+    const handleButtonClick = () => {
+        const email = emailRef.current.value ;
+        const password = passwordRef.current.value ;
+
+        const validationResult = validation(email, password);  //результат проверки
+
+
+        setEmailError(!validationResult.emailBool);  // Обновляем состояния ошибок
+        setPasswordError(!validationResult.passwordBool);
+
+
+        setLogged(validationResult.emailBool
+            && validationResult.passwordBool); //проверяем логин и пароль
+        }
+
     const setPageContent = () =>{
         switch(isLogged){
             case true:
@@ -19,14 +41,29 @@ function Account(){
                         <ul className="input-window-description-list">
                             <li className = "input-window-description">
                                 <p className="description-text">логин</p>
-                                <input className="data-input-window" placeholder="введите свой логин или email"></input>
+                                <input
+                                     className="data-input-window"
+                                     placeholder="введите свой логин или email"
+                                     required = ""
+                                     ref = {emailRef}
+                                     id = {emailError ? "error" : ""}
+                                >
+                                </input>
                             </li>
                             <li className = "input-window-description">
                                 <p className="description-text">пароль</p>
-                                <input className="data-input-window" placeholder="введите свой пароль"></input>
+                                <input
+                                    className="data-input-window"
+                                    placeholder="введите свой пароль"
+                                    type = "password"
+                                    required = ""
+                                    ref = {passwordRef}
+                                    id = {passwordError ? "error" : ""}
+                                >
+                                </input>
                             </li>
                         </ul>
-                        <button className="input-confirm-button">Войти</button>
+                        <button className="input-confirm-button" onClick = {handleButtonClick} >Войти</button>
                         <div className="additional-options">
                             <button className="options-button">нет аккаунта</button>
                             <button className="options-button">восстановление пароля</button>
