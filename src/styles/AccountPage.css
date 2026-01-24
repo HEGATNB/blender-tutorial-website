@@ -84,3 +84,12 @@
 #error{
     border: 3px solid #ee5353 !important;
 }
+
+#decline{
+    background: none;
+}
+
+.password-reset-buttons{
+    display: flex;
+    width: 95%;
+}
