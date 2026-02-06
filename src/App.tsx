@@ -4,7 +4,7 @@ import Navbar from './components/navigation.tsx'
 import AboutUs from './pages/MainPage.tsx'
 import Settings from './pages/SettingsPage.tsx'
 import Account from './pages/AccountPage.tsx'
-import Subscription from './pages/SubscriptionInfo.tsx'
+import Practice from './pages/PracticePage.tsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
              <Route path="/" element={<AboutUs />} />
              <Route path="/settings" element={<Settings />} />
              <Route path="/account" element={<Account />} />
-             <Route path= "/subscription" element={<Subscription />} />
+             <Route path= "/practice" element={<Practice />} />
          </Routes>
       </div>
   )

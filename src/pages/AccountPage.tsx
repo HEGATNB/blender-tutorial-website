@@ -7,22 +7,68 @@ function Account(){
     const [emailError, setEmailError] = useState(false);       //хук для ошибки в логине
     const [passwordError, setPasswordError] = useState(false); //хук для ошибки в пароле
 
+    const isActiveRequest = useRef(false);             //ссылка для запроса в процессе
+    const lastRequestRef = useRef<number>(0);        //ссылка для последнего запроса
+    const REQUEST_DELAY = 2000;
+
     const emailRef = useRef<HTMLInputElement>(null);      //ссылка на ввод эмейла
     const passwordRef = useRef<HTMLInputElement>(null);   //ссылка на ввод пароля
+    const newEmailRef = useRef<HTMLInputElement>(null);
+    const newPasswordRef = useRef<HTMLInputElement>(null);
 
-    const handleButtonClick = async () => {
-        const email = emailRef.current?.value || '';
-        const password = passwordRef.current?.value || '';
 
-        const validationResult = validation(email, password);  //результат проверки
+    const handleButtonClickRegister = async () => {
+        const newEmail = newEmailRef.current?.value || '';
+        const newPassword = newPasswordRef.current?.value || '';
+
+        const validationResult = validation(newEmail, newPassword);  //результат проверки
 
         setEmailError(!validationResult.emailBool);  // Обновляем состояния ошибок
         setPasswordError(!validationResult.passwordBool);
 
-        if (validationResult.emailBool && validationResult.passwordBool) {//проверяем логин и пароль
+        if (validationResult.emailBool && validationResult.passwordBool) {
+            try {
+                const response = await fetch('http://localhost:3000/register', {  //ждем ответ сервера
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({  //отправляем эмейл и пароль на сервер
+                        newEmail: newEmail,
+                        newPassword: newPassword
+                    })
+                });
+                if (response.ok) {
+                    console.log('Регистрация успешна');
+                    setPageContent('login');
+                } else {
+                    console.error('Ошибка при регистрации');
+                }
+            } catch (error) {
+                console.error('Ошибка при отправке запроса:', error);
+            }
+        }
+    }
+
+    const handleButtonClickLogin = async () => {
+        const email = emailRef.current?.value || '';
+        const password = passwordRef.current?.value || '';
+
+        const validationResult = validation(email, password);  //результат проверки
+        setEmailError(!validationResult.emailBool);  // Обновляем состояния ошибок
+        setPasswordError(!validationResult.passwordBool);
+
+        if (validationResult.emailBool && validationResult.passwordBool) {  //проверяем логин и пароль
+            const now = Date.now();
+
+            if (isActiveRequest.current) return;           //если есть активный запрос следующий не отправляем
+            if (now - lastRequestRef.current < REQUEST_DELAY) return;
+
+            isActiveRequest.current = true;
+            lastRequestRef.current = now;
 
             try {
-                const response = await fetch('http://localhost:3000', {  //ждем ответ сервера
+                const response = await fetch('http://localhost:3000/login', {  //ждем ответ сервера
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -33,7 +79,9 @@ function Account(){
                     })
                 });
                 const data = await response.json();
+
                 data.success ? setPageContent('active') : setEmailError(true) & setPasswordError(true); //входим или выдаем ошибку
+
                 if (response.ok) {
                     console.log('Данные успешно отправлены');
                 } else {
@@ -42,6 +90,7 @@ function Account(){
             } catch (error) {
                 console.error('Ошибка при отправке запроса:', error);
             }
+            isActiveRequest.current = false;
         }
     }
 
@@ -90,7 +139,7 @@ function Account(){
                                          placeholder="введите свой логин или email"
                                          name = "email"
                                          required = ""
-                                         ref = {emailRef}
+                                         ref = {newEmailRef}
                                          id = {emailError ? "error" : ""}
                                     >
                                     </input>
@@ -103,7 +152,7 @@ function Account(){
                                         type = "password"
                                         required = ""
                                         name="password"
-                                        ref = {passwordRef}
+                                        ref = {newPasswordRef}
                                         id = {passwordError ? "error" : ""}
                                     >
                                     </input>
@@ -113,16 +162,18 @@ function Account(){
                                     <input
                                         className="data-input-window"
                                         placeholder="введите пароль снова"
-                                        onpaste="return false;"
+                                        onPaste="return false;"
                                         type = "password"
                                         required = ""
-                                        ref = {passwordRef}
                                         id = {passwordError ? "error" : ""}
                                     >
                                     </input>
                                 </li>
                             </ul>
-                            <button className="input-confirm-button" onClick = {() => setPageContent('login')} >Продолжить</button>
+                            <div className="password-reset-buttons">
+                                <button className="input-confirm-button" id="decline" onClick = {() => setPageContent('login')} >Отмена</button>
+                                <button className="input-confirm-button" onClick = {() => {handleButtonClickRegister(); }} >Продолжить</button>
+                            </div>
                         </div>
                     </div>
                 )
@@ -155,7 +206,7 @@ function Account(){
                                 </input>
                             </li>
                         </ul>
-                        <button className="input-confirm-button" onClick = {handleButtonClick} >Войти</button>
+                        <button className="input-confirm-button" onClick = {handleButtonClickLogin} >Войти</button>
                         <div className="additional-options">
                             <button className="options-button"
                              onClick = {() => setPageContent('register')}

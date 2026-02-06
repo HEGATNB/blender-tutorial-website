@@ -1,8 +1,9 @@
 import '../styles/MainPage.css'
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { FaLock } from "react-icons/fa";
 import { FaLockOpen } from "react-icons/fa";
 import PercentImage from "../assets/progress_bar_percent.png"
+import WorkspaceVideo from "../assets/cube-animation.mp4"
 
 const courses = [
     {id:1, name:"1. Установка программы", status:"completed"},
@@ -12,12 +13,19 @@ const courses = [
     {id:5, name:"5. Первая модель", status:"not-completed"}
 ];
 
+const lessonsCache = new Map();
+
 const progress_value = courses.filter(course => course.status === "completed").length / courses.length;
+//прогресс в изучении курсов
 
 async function getInfo(lessonId){
+    if (lessonsCache.has(lessonId)){
+        return lessonsCache.get(lessonId);
+    }
     try {
         const response = await fetch(`/guide_pages/lesson(${lessonId}).json`);
         const data = await response.json();
+        lessonsCache.set(lessonId,data);
         return data;
     } catch (error) {
         console.error('Ошибка загрузки:', error);
@@ -27,10 +35,20 @@ async function getInfo(lessonId){
 function AboutUs() {
     const [lessonContent, setLessonContent] = useState('');
     const [isCourseActive, setCourseActive] = useState(false);
+    const videoRef = useRef<HTMLVideoElement>(null);
     return (
         <div className="info-container">
             <div className="left-right-group">
-                <div className={ isCourseActive ? "guide-space" : "work-space"}>
+                <video
+                className={ isCourseActive ? "empty"  : "video-active"}
+                autoPlay
+                muted
+                loop
+                playsInline
+                >
+                    <source src={WorkspaceVideo} type="video/mp4"></source>
+                </video>
+                <div className={ isCourseActive ? "work-space" : "empty"}>
                     <p className = "guide-text" >{lessonContent}</p>
                 </div>
                 <div className="courses-list">

@@ -1,7 +1,7 @@
-function Subscription(){
+function Practice(){
     return(
         <h2>Тарифы</h2>
         )
     }
 
-export default Subscription
+export default Practice

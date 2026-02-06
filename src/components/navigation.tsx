@@ -23,8 +23,8 @@ function Navbar(){
                     </Link>
                 </li>
                 <li className= "nav-button">
-                    <Link to ="/subscription" >
-                        <span>О подписке</span>
+                    <Link to ="/practice" >
+                        <span>Практика</span>
                     </Link>
                 </li>
                 <li className= "nav-button">
